@@ -1,0 +1,75 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linkWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  background: #ffe600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.35s;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  font-size: 1.5rem;
+  padding: 0 1rem;
+  transition: all 0.3s ease;
+  /* width: 100%; */
+  gap: 2rem;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  border: 3px solid transparent;
+  transform: rotate(-45deg);
+  transition: all 0.35s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon svg {
+  width: 30px;
+  height: 30px;
+  fill: #51d289;
+  transition: all 0.35s;
+}
+
+.button:hover {
+  background: transparent;
+  color: #51d289;
+  border-color: #51d289;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1rem 1rem 0rem;
+}
+
+.button:hover .icon {
+  transform: rotate(0deg);
+  border-color: #51d289;
+  animation: slide 2s ease-in-out infinite;
+}
+@keyframes slide {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
