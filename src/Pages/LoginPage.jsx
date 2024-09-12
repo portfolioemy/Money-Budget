@@ -1,22 +1,20 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
-import StartButton from '../../components/Buttons/StartButton/StartButton.jsx'; 
-import WelcomePageImage from '../../assets/Frame 14.png';
-import styles from '../../style/WelcomePage.module.css';
+// import { useNavigate } from 'react-router-dom';
+import WelcomePageImage from '../assets/Frame 14.png';
+import styles from '../style/WelcomePage.module.css';
+import { Formik } from 'formik';
+import { useAPIContext } from '../context/ApiContext';
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+  const {setUserData, getUserData}=useAPIContext()
+  // const navigate = useNavigate();
   const onSubmit = (values) => {
-    Cookie.set('userDetails', JSON.stringify(values), { expires: 7 });
-    navigate('/dashboard');
+    setUserData(values)
+    // Cookie.set('userDetails', JSON.stringify(values), { expires: 7 });
+    // navigate('/dashboard');
   };
 
-  const fields = [
-    { name: 'income', type: 'text', placeholder: 'Insert Your Income' },
-    { name: 'name', type: 'text', placeholder: 'Insert Your Name' },
-    { name: 'goals', type: 'text', placeholder: 'Insert Your Goals' },
-  ];
 
   return (
     <div className={styles.container}>
@@ -25,7 +23,7 @@ const LoginPage = () => {
       </div>
       <div className={styles.formContainer}>
       <h1 className={styles.title}>Money <span>Budget</span></h1>
-      <Formik 
+      <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
