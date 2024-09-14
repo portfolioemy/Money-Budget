@@ -26,7 +26,7 @@ export const APIProvider = ({ children }) => {
   };
 
   const addExpense = (expense) => {
-    setExpenses([...JSON.parse(localStorage.getItem("expenses")), { createdAt: Date.now().toString(), ...expense }]);
+    setExpenses([...(localStorage.getItem("expenses")?JSON.parse(localStorage.getItem("expenses")):[]), { createdAt: Date.now().toString(), ...expense }]);
 };
 
 const updateExpense = (updatedExpense) => {
