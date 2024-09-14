@@ -23,6 +23,10 @@
   animation: slideIn 0.5s ease-out;
 }
 
+.close{
+  cursor: pointer;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
