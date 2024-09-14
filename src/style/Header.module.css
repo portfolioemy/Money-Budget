@@ -26,48 +26,7 @@
   font-size: 1.5rem;
 }
 
-.button {
-  display: block;
-  line-height: 40px;
-  font-size: 1rem;
-  text-decoration: none;
-  color: #000;
-  font-weight: 500;
-  background-color: #ffe600;
-  letter-spacing: 2px;
-  text-align: center;
-  position: relative;
-  transition: all 0.35s;
-  overflow: hidden;
-  cursor: pointer;
-  border: none;
-}
 
-.button span {
-  position: relative;
-  z-index: 2;
-  transition: color 0.35s;
-}
-
-.button:after {
-  position: absolute;
-  content: "";
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: #51d289;
-  transition: width 0.35s;
-  z-index: 1;
-}
-
-.button:hover span {
-  color: #fff;
-}
-
-.button:hover:after {
-  width: 100%;
-}
 
 @media only screen and (max-width: 600px) {
   .header {
