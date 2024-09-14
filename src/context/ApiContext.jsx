@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import HobbyGlyph from "../components/icons/HobbyGlyph";
+import FoodGlyph from "../components/icons/FoodGlyph";
 
 export const APIContext = React.createContext();
 
@@ -9,9 +11,9 @@ export const APIProvider = ({ children }) => {
   const [currentExpense, setCurrentExpense] = React.useState(null);
 
   React.useMemo(() => {
-    if(localStorage.getItem("user")!==JSON.stringify(userData))
+    if(localStorage.getItem("user")!==JSON.stringify(userData) && JSON.stringify(userData)!=='{}')
       localStorage.setItem("user", JSON.stringify(userData));
-    if(localStorage.getItem("expenses")!==JSON.stringify(expenses))
+    if(localStorage.getItem("expenses")!==JSON.stringify(expenses) && JSON.stringify(expenses)!=='[]')
     localStorage.setItem("expenses", JSON.stringify(expenses));
   }, [userData,expenses]);
 
@@ -19,8 +21,12 @@ export const APIProvider = ({ children }) => {
     return JSON.parse(localStorage.getItem("user"));
   };
 
+  const getExpeses = () => {
+    return JSON.parse(localStorage.getItem("expenses"));
+  };
+
   const addExpense = (expense) => {
-    setExpenses((preValue)=>[...preValue, { id: Date.now().toString(), ...expense }]);
+    setExpenses([...JSON.parse(localStorage.getItem("expenses")), { createdAt: Date.now().toString(), ...expense }]);
 };
 
 const updateExpense = (updatedExpense) => {
@@ -42,12 +48,13 @@ const selectExpenseToEdit = (expense) => {
       userData,
             setUserData,
             getUserData,
-            expenses,
+            getExpeses,
             addExpense,
             updateExpense,
             deleteExpense,
             currentExpense,
-            selectExpenseToEdit
+            selectExpenseToEdit,
+            expenses
         }}>
       {children}
     </APIContext.Provider>
@@ -66,3 +73,11 @@ export const useAPIContext = () => {
   return React.useContext(APIContext);
 };
 
+export const categories=[
+  {id:"1",name:'Hobbies', icon:<HobbyGlyph/>},
+  {id:"2",name:'Food', icon:<FoodGlyph/>},
+  {id:"3",name:'Rent', icon:<HobbyGlyph/>},
+  {id:"4",name:'Debits', icon:<HobbyGlyph/>},
+  {id:"5",name:'Saving', icon:<HobbyGlyph/>},
+  {id:"6",name:'Health', icon:<HobbyGlyph/>},
+]
