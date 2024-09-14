@@ -6,7 +6,7 @@ import TextInput from "../components/inputs/TextInput.jsx";
 import styles from "../style/WelcomePage.module.css";
 import WelcomePageImage from "../assets/Frame 14.png";
 import StandardButton from "../components/buttons/StandardButton.jsx";
-import { useAPIContext } from "../context/ApiContext.jsx";
+import { categories, useAPIContext } from "../context/ApiContext.jsx";
 
 const LoginPage = () => {
   const { setUserData } = useAPIContext();
@@ -50,6 +50,7 @@ const LoginPage = () => {
                 type="text"
                 placeholder="Enter your goal"
               />
+
               <StandardButton
                 label="start your calculation"
                 onClick={handleSubmit}

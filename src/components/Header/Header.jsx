@@ -4,7 +4,7 @@ import LogoImage from "../../assets/logo-main.svg";
 import IconUser from "../../assets/user.svg";
 import StandardButton from "../buttons/StandardButton";
 import Modal from "../modals/Modal";
-import { useAPIContext } from "../../context/ApiContext";
+import { categories, useAPIContext } from "../../context/ApiContext";
 import TextInput from "../inputs/TextInput";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -14,6 +14,8 @@ const Header = () => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const { getUserData,addExpense} = useAPIContext();
   const submit = (values) => {
+    console.log(values);
+    
     addExpense(values); 
     setModalVisible(false)
   };
@@ -39,7 +41,7 @@ const Header = () => {
             validationSchema={validationSchema}
             onSubmit={submit}
           >
-            {({ isSubmitting, handleSubmit }) => (
+            {({ isSubmitting, handleSubmit,setFieldValue }) => (
               <>
                 <TextInput
                   label="Expense Name"
@@ -53,7 +55,10 @@ const Header = () => {
                   type="number"
                   placeholder="Enter your expense"
                 />
-
+              <select  name={INPUT_FIELDS.CATEGORY} onChange={(e)=>{                
+                setFieldValue(INPUT_FIELDS.CATEGORY,e?.target?.value)}}>
+                {categories.map((item)=><option key={item.id} value={item.id}>{item.name}</option>)}
+              </select>
                 <StandardButton
                   label="Enter you expense"
                   onClick={handleSubmit}
@@ -72,20 +77,23 @@ const Header = () => {
   );
 };
 const INPUT_FIELDS = {
-    EXPENSE: "Expense",
-    AMOUNT: "Amount",
-  };
+    EXPENSE: "expense",
+    AMOUNT: "amount",
+  CATEGORY:'category'
+};
 
   const initialValues = {
     [INPUT_FIELDS.EXPENSE]: "",
     [INPUT_FIELDS.AMOUNT]: "",
-  };
+  [INPUT_FIELDS.CATEGORY]: "",
+};
 
   const validationSchema = Yup.object({
     [INPUT_FIELDS.AMOUNT]: Yup.number()
       .required("Expense is required")
       .positive("Expense must be positive"),
     [INPUT_FIELDS.EXPENSE]: Yup.string().required("Expense name is required"),
-  });
+  [INPUT_FIELDS.CATEGORY]: Yup.string().required("Category is required"),
+});
 
 export default Header;
