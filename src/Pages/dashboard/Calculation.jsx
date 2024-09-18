@@ -2,9 +2,11 @@ import React, { useContext, useEffect } from "react";
 import { APIContext } from "../../context/ApiContext";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import StandardButton from "../../components/buttons/StandardButton";
 
 const Calculation = () => {
-  const { userData, expenses } = useContext(APIContext);
+    const { userData, expenses, resetExpenses } = useContext(APIContext);
+
 
   useEffect(() => {
     console.log("Expenses:", expenses);
@@ -41,9 +43,15 @@ const Calculation = () => {
         <p>Availble:${totalExpenses - totalIncome}</p>
         <p>Spent: ${totalExpenses}</p>
       </div>
+      <StandardButton
+            label="Reset Expenses"
+            customClass={"secondary"}
+            hasIcon
+            onClick={resetExpenses}
+          />
+
     </div>
   );
 };
 
 export default Calculation;
-``;
