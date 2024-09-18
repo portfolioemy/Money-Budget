@@ -11,17 +11,11 @@ import OtherGlyph from "../components/icons/OthersGlyph";
 
 export const APIContext = React.createContext();
 
-
 export const APIProvider = ({ children }) => {
   const [userData, setUserData] = React.useState(() => {
     const storedUserData = localStorage.getItem("user");
     return storedUserData ? JSON.parse(storedUserData) : {};
   });
-
-  const resetExpenses = () => {
-    setExpenses([]);
-    localStorage.removeItem("expenses"); 
-  };
 
   const [expenses, setExpenses] = React.useState(() => {
     const storedExpenses = localStorage.getItem("expenses");
@@ -71,6 +65,7 @@ export const APIProvider = ({ children }) => {
     setExpenses(updatedExpenses);
     localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
   };
+
   const deleteExpense = (id) => {
     const updatedExpenses = expenses.filter((expense) => expense.id !== id);
     setExpenses(updatedExpenses);
@@ -79,6 +74,32 @@ export const APIProvider = ({ children }) => {
 
   const selectExpenseToEdit = (expense) => {
     setCurrentExpense(expense);
+  };
+
+  const resetExpenses = () => {
+    setExpenses([]);
+    localStorage.removeItem("expenses");
+  };
+
+  const addSubscription = (expenseName, price) => {
+    if (!expenseName || !price) {
+      console.error("Invalid expense name or price:", { expenseName, price });
+      return;
+    }
+
+    const currentDate = new Date().toLocaleDateString();
+
+    const newExpense = {
+      id: Date.now().toString(),
+      name: expenseName,
+      price: price,
+      date: currentDate,
+      type: "subscription",
+    };
+
+    const updatedExpenses = [...expenses, newExpense];
+    setExpenses(updatedExpenses);
+    localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
   };
 
   return (
@@ -95,7 +116,8 @@ export const APIProvider = ({ children }) => {
         selectExpenseToEdit,
         expenses,
         categories,
-        resetExpenses
+        resetExpenses,
+        addSubscription, 
       }}
     >
       {children}

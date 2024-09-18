@@ -8,10 +8,6 @@ const Calculation = () => {
     const { userData, expenses, resetExpenses } = useContext(APIContext);
 
 
-  useEffect(() => {
-    console.log("Expenses:", expenses);
-    console.log("Income:", userData?.income);
-  }, [expenses, userData]);
 
   const totalIncome = parseFloat(userData?.income) || 1;
   const totalExpenses = expenses.reduce(

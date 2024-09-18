@@ -39,11 +39,9 @@ const ExpensesList = () => {
       {filteredExpenses?.length > 0 ? (
         <ul>
           {filteredExpenses?.map((expense, index) => (
-            <li key={index}>
               <li key={index}>
                 {categories.find((item) => item.id === expense.category)?.icon}{" "}
                 <ExpenseCard expense={expense} /> 
-              </li>
             </li>
           ))}
         </ul>
