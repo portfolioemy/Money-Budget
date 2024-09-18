@@ -11,12 +11,17 @@ import OtherGlyph from "../components/icons/OthersGlyph";
 
 export const APIContext = React.createContext();
 
+
 export const APIProvider = ({ children }) => {
-  // Load initial data from localStorage if available
   const [userData, setUserData] = React.useState(() => {
     const storedUserData = localStorage.getItem("user");
     return storedUserData ? JSON.parse(storedUserData) : {};
   });
+
+  const resetExpenses = () => {
+    setExpenses([]);
+    localStorage.removeItem("expenses"); 
+  };
 
   const [expenses, setExpenses] = React.useState(() => {
     const storedExpenses = localStorage.getItem("expenses");
@@ -90,6 +95,7 @@ export const APIProvider = ({ children }) => {
         selectExpenseToEdit,
         expenses,
         categories,
+        resetExpenses
       }}
     >
       {children}

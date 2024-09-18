@@ -52,14 +52,8 @@ const ExpensesList = () => {
           <p>
             Looks like you haven't added any <span>expenses yet.</span>
           </p>
-          <p>No worries, just hit the</p>
+          <p>No worries, just hit the <span>'New Expense' </span>button to get started</p>
 
-          <StandardButton
-            label="start your calculation"
-            customClass={"primary"}
-            hasIcon
-          />
-          <p>button to get started</p>
         </div>
       )}
     </div>
