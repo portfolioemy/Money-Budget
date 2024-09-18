@@ -19,4 +19,4 @@ const HobbyGlyph = (props) => (
     </defs>
   </svg>
 )
-export default HobbyGlyph
+export default HobbyGlyph;

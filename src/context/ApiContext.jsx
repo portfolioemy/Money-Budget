@@ -2,6 +2,12 @@ import React from "react";
 import PropTypes from 'prop-types';
 import HobbyGlyph from "../components/icons/HobbyGlyph";
 import FoodGlyph from "../components/icons/FoodGlyph";
+import RentGlyph from "../components/icons/RentGlyph";
+import SavingGlyph from "../components/icons/SavingGlyph";
+import SaludGlyph from "../components/icons/SaludGlyph";
+import DebtsGlyph from "../components/icons/DebtsGlyph";
+import SubscriptionGlyph from "../components/icons/SubscriptionGlyph";
+import OtherGlyph from "../components/icons/OthersGlyph";
 
 export const APIContext = React.createContext();
 
@@ -26,17 +32,27 @@ export const APIProvider = ({ children }) => {
   };
 
   const addExpense = (expense) => {
-    setExpenses([...(localStorage.getItem("expenses")?JSON.parse(localStorage.getItem("expenses")):[]), { createdAt: Date.now().toString(), ...expense }]);
-};
+    const newExpense = {
+      id: Date.now().toString(), 
+      createdAt: new Date().toISOString(),
+      ...expense,
+    };
+    setExpenses([...expenses, newExpense]);
+    localStorage.setItem("expenses", JSON.stringify([...expenses, newExpense]));
+  };
 
 const updateExpense = (updatedExpense) => {
-  setExpenses(expenses.map((expense) =>
-      expense.id === updatedExpense.id ? updatedExpense : expense
-  ));
+  const updatedExpenses = expenses.map((expense) => 
+    expense.id === updatedExpense.id ? updatedExpense : expense
+  );
+  setExpenses(updatedExpenses);
+  localStorage.setItem("expenses", JSON.stringify(updatedExpenses)); 
 };
 
 const deleteExpense = (id) => {
-  setExpenses(expenses.filter((expense) => expense.id !== id));
+  const updatedExpenses = expenses.filter((expense) => expense.id !== id);
+  setExpenses(updatedExpenses);
+  localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
 };
 
 const selectExpenseToEdit = (expense) => {
@@ -54,7 +70,8 @@ const selectExpenseToEdit = (expense) => {
             deleteExpense,
             currentExpense,
             selectExpenseToEdit,
-            expenses
+            expenses,
+            categories 
         }}>
       {children}
     </APIContext.Provider>
@@ -76,8 +93,10 @@ export const useAPIContext = () => {
 export const categories=[
   {id:"1",name:'Hobbies', icon:<HobbyGlyph/>},
   {id:"2",name:'Food', icon:<FoodGlyph/>},
-  {id:"3",name:'Rent', icon:<HobbyGlyph/>},
-  {id:"4",name:'Debits', icon:<HobbyGlyph/>},
-  {id:"5",name:'Saving', icon:<HobbyGlyph/>},
-  {id:"6",name:'Health', icon:<HobbyGlyph/>},
+  {id:"3",name:'Rent', icon:<RentGlyph/>},
+  {id:"4",name:'Debits', icon:<DebtsGlyph/>},
+  {id:"5",name:'Saving', icon:<SavingGlyph/>},
+  {id:"6",name:'Salud', icon:<SaludGlyph/>},
+  {id:"7",name:'Subscription', icon:<SubscriptionGlyph/>},
+  {id:"8",name:'Others', icon:<OtherGlyph/>},
 ]

@@ -14,4 +14,4 @@ const FoodGlyph = (props) => (
     />
   </svg>
 )
-export default FoodGlyph
+export default FoodGlyph;
