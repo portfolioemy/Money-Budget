@@ -3,6 +3,7 @@ import StandardButton from "../../components/buttons/StandardButton";
 import Modal from "../../components/modals/Modal";
 import Header from "../../components/Header/Header"
 import ExpensesList from "./ExpensesList";
+import Calculation from "./Calculation";
 
 const Dashboard = () => {
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -14,6 +15,7 @@ const Dashboard = () => {
     <>
     <Header/>
     <ExpensesList/>
+    <Calculation/>
       {/* <StandardButton
         label="New Expenses"
         onClick={() => {
