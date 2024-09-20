@@ -12,7 +12,7 @@ import * as Yup from "yup";
 
 const Header = () => {
   const [modalVisible, setModalVisible] = React.useState(false);
-  const { getUserData,addExpense} = useAPIContext();
+  const { getUserData,addExpense,expenses} = useAPIContext();
   const submit = (values) => {
     console.log(values);
     
@@ -38,7 +38,10 @@ const Header = () => {
         <Modal visible={modalVisible} setVisible={setModalVisible}>
           <Formik
             initialValues={initialValues}
-            validationSchema={validationSchema}
+            validationSchema={validationSchema(getUserData().income - expenses.reduce(
+              (acc, expense) => acc + parseFloat(expense.amount),
+              0
+            ))}
             onSubmit={submit}
           >
             {({ isSubmitting, handleSubmit,setFieldValue }) => (
@@ -88,10 +91,10 @@ const INPUT_FIELDS = {
   [INPUT_FIELDS.CATEGORY]: "",
 };
 
-  const validationSchema = Yup.object({
+  const validationSchema = (maxAmount)=>Yup.object({
     [INPUT_FIELDS.AMOUNT]: Yup.number()
       .required("Expense is required")
-      .positive("Expense must be positive"),
+      .positive("Expense must be positive").max(maxAmount),
     [INPUT_FIELDS.EXPENSE]: Yup.string().required("Expense name is required"),
   [INPUT_FIELDS.CATEGORY]: Yup.string().required("Category is required"),
 });

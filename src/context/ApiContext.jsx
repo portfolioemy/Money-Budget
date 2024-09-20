@@ -8,37 +8,16 @@ import SaludGlyph from "../components/icons/SaludGlyph";
 import DebtsGlyph from "../components/icons/DebtsGlyph";
 import SubscriptionGlyph from "../components/icons/SubscriptionGlyph";
 import OtherGlyph from "../components/icons/OthersGlyph";
+import AmazonGlyph from "../components/icons/AmazonGlyph"
+import FacebookGlyph from "../components/icons/FacebookGlyph";
+import NetflixGlyph from "../components/icons/NetflixGlyph";
+import SpotifyGlyph from "../components/icons/SpotifyGlyph";
+import GoogleGlyph from "../components/icons/GoogleGlyph";
+
 
 export const APIContext = React.createContext();
 
 export const APIProvider = ({ children }) => {
-  const [userData, setUserData] = React.useState(() => {
-    const storedUserData = localStorage.getItem("user");
-    return storedUserData ? JSON.parse(storedUserData) : {};
-  });
-
-  const [expenses, setExpenses] = React.useState(() => {
-    const storedExpenses = localStorage.getItem("expenses");
-    return storedExpenses ? JSON.parse(storedExpenses) : [];
-  });
-
-  const [currentExpense, setCurrentExpense] = React.useState(null);
-
-  React.useEffect(() => {
-    if (
-      JSON.stringify(userData) !== "{}" &&
-      localStorage.getItem("user") !== JSON.stringify(userData)
-    ) {
-      localStorage.setItem("user", JSON.stringify(userData));
-    }
-    if (
-      JSON.stringify(expenses) !== "[]" &&
-      localStorage.getItem("expenses") !== JSON.stringify(expenses)
-    ) {
-      localStorage.setItem("expenses", JSON.stringify(expenses));
-    }
-  }, [userData, expenses]);
-
   const getUserData = () => {
     return JSON.parse(localStorage.getItem("user"));
   };
@@ -46,6 +25,26 @@ export const APIProvider = ({ children }) => {
   const getExpeses = () => {
     return JSON.parse(localStorage.getItem("expenses"));
   };
+  const [userData, setUserData] = React.useState(() => {
+    const storedUserData = getUserData()
+    return storedUserData ? storedUserData : {};
+  });
+
+  const [expenses, setExpenses] = React.useState(() => {
+    const storedExpenses = getExpeses()
+    return storedExpenses ? storedExpenses : [];
+  });
+
+  const [currentExpense, setCurrentExpense] = React.useState(null);
+
+  React.useEffect(() => {
+      localStorage.setItem("user", JSON.stringify(userData));
+
+      localStorage.setItem("expenses", JSON.stringify(expenses));
+
+  }, [userData, expenses]);
+
+
 
   const addExpense = (expense) => {
     const newExpense = {
@@ -55,7 +54,7 @@ export const APIProvider = ({ children }) => {
     };
     const updatedExpenses = [...expenses, newExpense];
     setExpenses(updatedExpenses);
-    localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
+    // localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
   };
 
   const updateExpense = (updatedExpense) => {
@@ -63,13 +62,13 @@ export const APIProvider = ({ children }) => {
       expense.id === updatedExpense.id ? updatedExpense : expense
     );
     setExpenses(updatedExpenses);
-    localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
+    // localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
   };
 
   const deleteExpense = (id) => {
     const updatedExpenses = expenses.filter((expense) => expense.id !== id);
     setExpenses(updatedExpenses);
-    localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
+    // localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
   };
 
   const selectExpenseToEdit = (expense) => {
@@ -81,26 +80,7 @@ export const APIProvider = ({ children }) => {
     localStorage.removeItem("expenses");
   };
 
-  const addSubscription = (expenseName, price) => {
-    if (!expenseName || !price) {
-      console.error("Invalid expense name or price:", { expenseName, price });
-      return;
-    }
-
-    const currentDate = new Date().toLocaleDateString();
-
-    const newExpense = {
-      id: Date.now().toString(),
-      name: expenseName,
-      price: price,
-      date: currentDate,
-      type: "subscription",
-    };
-
-    const updatedExpenses = [...expenses, newExpense];
-    setExpenses(updatedExpenses);
-    localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
-  };
+  
 
   return (
     <APIContext.Provider
@@ -117,7 +97,6 @@ export const APIProvider = ({ children }) => {
         expenses,
         categories,
         resetExpenses,
-        addSubscription, 
       }}
     >
       {children}
@@ -146,4 +125,11 @@ export const categories = [
   { id: "6", name: "Salud", icon: <SaludGlyph /> },
   { id: "7", name: "Subscription", icon: <SubscriptionGlyph /> },
   { id: "8", name: "Others", icon: <OtherGlyph /> },
+];
+export const additionalExpense = [
+  { id: "1", expense: "Amazon",amount:50, category:-1, icon: <AmazonGlyph /> },
+  { id: "2", expense: "Facebook",amount:50, category:-1,  icon: <FacebookGlyph /> },
+  { id: "3", expense: "Netflex", amount:50, category:-1, icon: <NetflixGlyph /> },
+  { id: "4", expense: "Spotify",amount:50, category:-1,  icon: <SpotifyGlyph /> },
+  { id: "5", expense: "Google",amount:50, category:-1,  icon: <GoogleGlyph /> },
 ];
