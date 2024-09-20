@@ -1,34 +1,33 @@
-import "../../style/Description.module.css";
-import "../../style/WelcomePage.module.css";
 import React from "react";
-import StandardButton from "../../components/buttons/StandardButton.jsx";
 import { categories, useAPIContext } from "../../context/ApiContext.jsx";
 import ExpenseCard from "../../components/cards/ExpenseCard.jsx";
+import styles from "../../style/Dashboard.module.css"
 
 const ExpensesList = () => {
-  const { getExpeses } = useAPIContext();
+  const { getExpeses,expenses } = useAPIContext();
+  const [names, setNames] = React.useState([]);
   const [selectedName, setSelectedName] = React.useState("");
+  const [filteredExpenses, setFilteredExpenses] = React.useState(getExpeses()?.filter(
+    (expense) => selectedName === "" || expense.expense === selectedName
+  ));
 
-  const uniqueNames = React.useMemo(() => {
-    const names = getExpeses()?.map((expense) => expense.expense);
-    return Array.from(new Set(names));
-  }, [localStorage.getItem("expenses")]);
+  React.useMemo(() => {
+    setFilteredExpenses(expenses)
+    setNames(expenses?.map((expense) => expense.expense));
+  }, [expenses]);
 
   const handleSelectChange = (e) => {
     setSelectedName(e.target.value);
   };
 
-  const filteredExpenses = getExpeses()?.filter(
-    (expense) => selectedName === "" || expense.expense === selectedName
-  );
 
   return (
-    <div className="descriptionContainer">
-      <div className="descriptionHeader">
-        <h2>Description</h2>
-        <select onChange={handleSelectChange} value={selectedName}>
+    <div className={styles.descriptionContainer}>
+      <div className={styles.descriptionHeader}>
+        <h2 className={styles.headerTitle}>Expenses Overview</h2>
+        <select className={styles.selector} onChange={handleSelectChange} value={selectedName}>
           <option value="">All</option>
-          {uniqueNames?.map((name, index) => (
+          {names?.map((name, index) => (
             <option key={index} value={name}>
               {name}
             </option>
@@ -40,18 +39,15 @@ const ExpensesList = () => {
         <ul>
           {filteredExpenses?.map((expense, index) => (
               <li key={index}>
-                {categories.find((item) => item.id === expense.category)?.icon}{" "}
+                {(expense.category===-1 ) ? expense?.icon : (categories.find((item) => item.id === expense.category)?.icon)}{" "}
                 <ExpenseCard expense={expense} /> 
             </li>
           ))}
         </ul>
       ) : (
-        <div>
-          <p>
-            Looks like you haven't added any <span>expenses yet.</span>
-          </p>
-          <p>No worries, just hit the <span>'New Expense' </span>button to get started</p>
-
+        <div className={styles.emptyMessage}>
+          <p>Looks like you haven't added any <span className={styles.highlight}>expenses</span> yet.</p>
+          <p>No worries, just hit the <span className={styles.highlight}>'New Expense'</span> button to get started.</p>
         </div>
       )}
     </div>

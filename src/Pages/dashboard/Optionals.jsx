@@ -1,64 +1,24 @@
-import React, { useContext } from "react";
-import { APIContext } from "../../context/ApiContext";
-import netflex from "../../assets/image.svg";
-
-import { FaSpotify, FaAmazon, FaGoogle, FaFacebook } from "react-icons/fa";
+import React from "react";
+import { additionalExpense, useAPIContext } from "../../context/ApiContext";
+import styles from "../../style/Dashboard.module.css";
 
 const Optionals = () => {
-  const { addSubscription } = useContext(APIContext);
-
-  const fixedExpenses = [
-    {
-      name: "NETFLIX",
-      price: 12.99,
-      icon: <img src={netflex} alt="Netflix" width={40} />,
-    },
-    {
-      name: "SPOTIFY",
-      price: 9.99,
-      icon: <FaSpotify size={40} color="#1DB954" />,
-    },
-    {
-      name: "AMAZON",
-      price: 15.99,
-      icon: <FaAmazon size={40} color="#ff9900" />,
-    },
-    {
-      name: "GOOGLE",
-      price: 19.99,
-      icon: <FaGoogle size={40} color="#4285F4" />,
-    },
-    {
-      name: "FACEBOOK",
-      price: 5.99,
-      icon: <FaFacebook size={40} color="#1877F2" />,
-    },
-  ];
-
-  const handleAddSubscription = (expenseName, expensePrice) => {
-    if (expensePrice) {
-      addSubscription(expenseName, expensePrice);
-    } else {
-      console.error(`Price is missing for ${expenseName}`);
-    }
-  };
-
+  const { addExpense } = useAPIContext();
+  
   return (
-    <div className="optionalsContainer">
+    <div className={styles.optionalsContainer}>
       <div>
-        <h2>Optionals</h2>
-        <div className="fixedExpenses">
-          <h3>CHOOSE ANY ADDITIONAL EXPENSES</h3>
-          <ul>
-            {fixedExpenses.map((expense, index) => (
-              <li key={index} className="expenseItem">
-                <div className="expenseIcon">{expense.icon}</div>
-                <span>{expense.name}</span>
+        <h2 className={styles.optionalsTitle}>Optionals</h2>
+        <div className={styles.fixedExpenses}>
+          <h3 className={styles.expenseHeader}>CHOOSE ANY ADDITIONAL EXPENSES</h3>
+          <ul className={styles.expenseList}>
+            {additionalExpense.map((expense, index) => (
+              <li key={index} className={styles.expenseItem}>
+                <div className={styles.expenseIcon}>{expense.icon}</div>
+                <span className={styles.expenseName}>{expense.expense}</span>
                 <button
-                  className="selectButton"
-                  onClick={() =>
-                    handleAddSubscription(expense.name, expense.price)
-                  }
+                  className={styles.selectButton}
+                  onClick={() => addExpense(expense)}
                 >
                   Select
                 </button>

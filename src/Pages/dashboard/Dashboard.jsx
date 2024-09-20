@@ -5,18 +5,20 @@ import Header from "../../components/Header/Header"
 import ExpensesList from "./ExpensesList";
 import Calculation from "./Calculation";
 import Optionals from "./Optionals";
+import  styles from "../../style/Dashboard.module.css"
 
 const Dashboard = () => {
   const [modalVisible, setModalVisible] = React.useState(false);
 
   return (
-    <>
-    <Header/>
-    <ExpensesList/>
-    <Calculation/>
-    <Optionals/>
-      
-    </>
+     <>
+     <Header />
+     <div className={styles.dashboardBody}>
+     <ExpensesList />
+     <Calculation />
+     <Optionals />
+     </div>
+   </>
   );
 };
 export default Dashboard;
