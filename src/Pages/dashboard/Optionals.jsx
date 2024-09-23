@@ -7,7 +7,6 @@ const Optionals = () => {
   
   return (
     <div className={styles.optionalsContainer}>
-      <div>
         <h2 className={styles.optionalsTitle}>Optionals</h2>
         <div className={styles.fixedExpenses}>
           <h3 className={styles.expenseHeader}>CHOOSE ANY ADDITIONAL EXPENSES</h3>
@@ -25,7 +24,6 @@ const Optionals = () => {
               </li>
             ))}
           </ul>
-        </div>
       </div>
     </div>
   );
