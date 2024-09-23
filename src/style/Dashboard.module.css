@@ -67,7 +67,9 @@ ul {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem
+  gap: 1rem;
+  overflow-y: auto;
+  max-height: 750px;
 }
 
 li {
@@ -120,7 +122,8 @@ li svg {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 1rem;
   flex: 1;
   background-color: #ffffff;
   padding: 1rem;
@@ -171,9 +174,10 @@ li svg {
 }
 
 .fixedExpenses {
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .expenseHeader {
@@ -185,6 +189,7 @@ li svg {
 .expenseList {
   list-style-type: none;
   padding: 0;
+  width: 100%;
 }
 
 .expenseItem {
@@ -221,8 +226,8 @@ li svg {
   background-color: #ffe600;
 }
 @media only screen and (max-width: 600px) {
-  .calculationContainer {
-    justify-content: center;
-    gap: 1rem;
-  }
+.dashboardBody {
+  flex-direction: column;
+}
+ 
 }

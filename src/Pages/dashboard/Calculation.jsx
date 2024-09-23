@@ -28,7 +28,7 @@ const Calculation = () => {
                         pathColor: spentPercentage > 75 ? "#ff0000" : "#51d289",
                         trailColor: "#ddd",
                         textColor: "#333",
-                        textSize: "1rem"
+                        textSize: "0.9rem"
                     })}
                 />
             </div>

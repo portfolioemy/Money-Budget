@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 1000;
   width: 100vw;
   height: 100vh;
@@ -26,17 +26,17 @@
   gap: 2rem;
 }
 
-.close{
+.close {
   cursor: pointer;
   display: flex;
-  justify-content:flex-end;
+  justify-content: flex-end;
   align-self: end;
-align-items: center;
+  align-items: center;
   font-size: 3rem;
   font-weight: 400;
 }
-.close:hover{
-  color:#51d289 ;
+.close:hover {
+  color: #51d289;
 }
 
 @keyframes fadeIn {
@@ -57,4 +57,10 @@ align-items: center;
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+@media only screen and (max-width: 600px) {
+  .modalContent {
+    width: 80%;
+}
 }
