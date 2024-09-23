@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: center;
   }
-  form > div{
+  .formContainer > div{
     width: 100%;
   }
   input {
@@ -31,7 +31,7 @@
     border-bottom: 2px solid #ffe600;
     background: transparent;
     width: 100%;
-    padding: 0.5rem 0 0.5rem 0;
+    padding: 1rem;
     font-size: 1.5rem;
     color: #fff;
 
