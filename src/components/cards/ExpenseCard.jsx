@@ -7,6 +7,7 @@ import TextInput from "../inputs/TextInput";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import PropTypes from "prop-types";
+import styles from "../../style/Dashboard.module.css"
 
 const ExpenseCard = ({ expense }) => {
   const { updateExpense, deleteExpense, selectExpenseToEdit, categories } =
@@ -43,13 +44,20 @@ const ExpenseCard = ({ expense }) => {
   };
 
   return (
-    <div className="expenseCard">
-      <p className="expenseName">{expense.expense}</p>
-      <p className="expenseAmount">${expense.amount}</p>
-      <p className="expenseDate">
+    <div className={styles.expenseCard}>
+      <div className={styles.expenseInfo}>
+        <div className={styles.nameDate}>
+        <p className={styles.expenseName}>{expense.expense}</p>
+        <p className={styles.expenseDate}>
         {new Date(expense.createdAt).toLocaleDateString()}
       </p>
-      <div className="iconContainer">
+        </div>
+       
+      <p className={styles.expenseAmount}>${expense.amount}</p>
+
+      </div>
+      
+      <div className={styles.iconContainer}>
         <button onClick={handleEdit}>
           <FaEdit size={24} color="green" />
         </button>
@@ -57,6 +65,8 @@ const ExpenseCard = ({ expense }) => {
           <FaTrash size={24} color="red" />
         </button>
       </div>
+      
+      
 
       <Modal visible={modalVisible} setVisible={setModalVisible}>
         <Formik
@@ -113,7 +123,10 @@ ExpenseCard.propTypes = {
     name: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,
     category: PropTypes.string.isRequired,
-    createdAt: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
+    createdAt: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.instanceOf(Date),
+    ]).isRequired,
   }).isRequired,
 };
 

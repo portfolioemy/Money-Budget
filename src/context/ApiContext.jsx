@@ -127,9 +127,9 @@ export const categories = [
   { id: "8", name: "Others", icon: <OtherGlyph /> },
 ];
 export const additionalExpense = [
-  { id: "1", expense: "Amazon",amount:50, category:-1, icon: <AmazonGlyph /> },
-  { id: "2", expense: "Facebook",amount:50, category:-1,  icon: <FacebookGlyph /> },
-  { id: "3", expense: "Netflex", amount:50, category:-1, icon: <NetflixGlyph /> },
-  { id: "4", expense: "Spotify",amount:50, category:-1,  icon: <SpotifyGlyph /> },
-  { id: "5", expense: "Google",amount:50, category:-1,  icon: <GoogleGlyph /> },
+  { id: "1", expense: "Amazon",amount:5, category:-1, icon: <AmazonGlyph /> },
+  { id: "2", expense: "Facebook",amount:5, category:-1,  icon: <FacebookGlyph /> },
+  { id: "3", expense: "Netflex", amount:5, category:-1, icon: <NetflixGlyph /> },
+  { id: "4", expense: "Spotify",amount:5, category:-1,  icon: <SpotifyGlyph /> },
+  { id: "5", expense: "Google",amount:5, category:-1,  icon: <GoogleGlyph /> },
 ];

@@ -6,7 +6,7 @@ import TextInput from "../components/inputs/TextInput.jsx";
 import styles from "../style/WelcomePage.module.css";
 import WelcomePageImage from "../assets/Frame 14.png";
 import StandardButton from "../components/buttons/StandardButton.jsx";
-import { categories, useAPIContext } from "../context/ApiContext.jsx";
+import { useAPIContext } from "../context/ApiContext.jsx";
 
 const LoginPage = () => {
   const { setUserData } = useAPIContext();
@@ -33,26 +33,23 @@ const LoginPage = () => {
           {({ isSubmitting, handleSubmit }) => (
             <>
               <TextInput
-                label="Name"
                 name={INPUT_FIELDS.NAME}
                 type="text"
                 placeholder="Enter your name"
               />
               <TextInput
-                label="Income"
                 name={INPUT_FIELDS.INCOME}
                 type="number"
                 placeholder="Enter your income"
               />
               <TextInput
-                label="Goal"
                 name={INPUT_FIELDS.GOAL}
                 type="text"
                 placeholder="Enter your goal"
               />
 
               <StandardButton
-                label="start your calculation"
+                label="Start"
                 onClick={handleSubmit}
                 customClass={"primary"}
                 hasIcon

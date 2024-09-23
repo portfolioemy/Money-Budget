@@ -25,9 +25,10 @@ const Calculation = () => {
                     value={spentPercentage}
                     text={`${Math.round(spentPercentage)}% Spent`}
                     styles={buildStyles({
-                        pathColor: spentPercentage > 75 ? "red" : "green",
+                        pathColor: spentPercentage > 75 ? "#ff0000" : "#51d289",
                         trailColor: "#ddd",
                         textColor: "#333",
+                        textSize: "1rem"
                     })}
                 />
             </div>

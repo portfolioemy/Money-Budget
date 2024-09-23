@@ -13,7 +13,7 @@ const StandardButton = ({ label, onClick, customClass, hasIcon }) => {
 
   return (
     <button className={buttonStyles.button} onClick={onClick}>
-      {label}
+      <span>{label}</span> 
       {hasIcon && (
         <span className={buttonStyles.icon}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268.832 268.832">
