@@ -39,9 +39,16 @@ const ExpensesList = () => {
         <ul>
           {filteredExpenses?.map((expense, index) => (
               <li key={index}>
-                {(expense.category===-1 ) ? expense?.icon : (categories.find((item) => item.id === expense.category)?.icon)}{" "}
-                <ExpenseCard expense={expense} /> 
+              {expense.category === -1 ? (
+                expense?.icon && React.isValidElement(expense.icon) ? expense.icon : null
+              ) : (
+                categories.find((item) => item.id === expense.category)?.icon && React.isValidElement(categories.find((item) => item.id === expense.category).icon)
+                  ? categories.find((item) => item.id === expense.category).icon
+                  : null
+              )}{" "}
+              <ExpenseCard expense={expense} />
             </li>
+            
           ))}
         </ul>
       ) : (
