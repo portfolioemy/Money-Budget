@@ -126,7 +126,7 @@ li svg {
   gap: 1rem;
   flex: 1;
   background-color: #ffffff;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -154,7 +154,31 @@ li svg {
 
 .budgetInfo {
   text-align: center;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
+
+.budgetInfo .available {
+  display: flex;
+  justify-content: space-between;
+  background-color: #218838;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.budgetInfo .spent {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 400;
+  color: #fff;
+}
+
+
 
 .optionalsContainer {
   display: flex;
@@ -225,9 +249,48 @@ li svg {
 .selectButton:hover {
   background-color: #ffe600;
 }
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
+}
+
+.errorMessage {
+  color: #ff0000;
+  text-align: center;
+  font-size: 1rem;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+.goal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  flex: 1;
+  margin: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
 @media only screen and (max-width: 600px) {
 .dashboardBody {
   flex-direction: column;
 }
  
 }
+
+
