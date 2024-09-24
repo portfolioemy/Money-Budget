@@ -11,10 +11,16 @@ const ExpensesList = () => {
     (expense) => selectedName === "" || expense.expense === selectedName
   ));
 
-  React.useMemo(() => {
-    setFilteredExpenses(expenses)
+  React.useEffect(() => {
     setNames(expenses?.map((expense) => expense.expense));
-  }, [expenses]);
+  
+    const filtered = expenses?.filter(
+      (expense) => selectedName === "" || expense.expense === selectedName
+    );
+  
+    setFilteredExpenses(filtered);
+  }, [expenses, selectedName]);
+  
 
   const handleSelectChange = (e) => {
     setSelectedName(e.target.value);
