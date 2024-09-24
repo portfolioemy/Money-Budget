@@ -107,7 +107,6 @@ const ExpenseCard = ({ expense }) => {
                 label="Submit Expense"
                 onClick={handleSubmit}
                 customClass={"secondary"}
-                hasIcon
               />
             </>
           )}
